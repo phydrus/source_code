@@ -175,7 +175,7 @@ c     !                             ThNewIm(j)*fRo(1,(Sorb(1,j))))/2.
         end if
       end if
       if(TLevel.eq.1.and.lPrint) then
-!       write(71,130,err=901)
+        write(71,130,err=901)
         if(lFluxOut) write(44,111)
         if(lChem) then
           write(70,150,err=902)
@@ -188,16 +188,16 @@ c     !                             ThNewIm(j)*fRo(1,(Sorb(1,j))))/2.
       end if
       if(lPrint.and.jPrint.eq.1) then
         if(lWat.or.TLevel.eq.1.or.lEnd) then
-!         if(t.lt.9999999.) then
-!            write(71,170,err=901) t,rTop,vTopW,vTop,vTopV,vBot,(CumQ(i),
-!           write(71,170,err=901) t,rTop,rRoot,vTop,vRoot,vBot,(CumQ(i),
-!    !               i=1,5),hNew(N),hRoot,hNew(1),vRunOff,CumQ(6),
-!    !               Volume,CumQ(7),CumQ(8),TLevel,CumQ(11),SnowLayer
-!    else
-!           write(71,171,err=901) t,rTop,rRoot,vTop,vRoot,vBot,(CumQ(i),
-!    !               i=1,5),hNew(N),hRoot,hNew(1),vRunOff,CumQ(6),
-!    !               Volume,CumQ(7),CumQ(8),TLevel,CumQ(11),SnowLayer
-!    end if
+          if(t.lt.9999999.) then
+c            write(71,170,err=901) t,rTop,vTopW,vTop,vTopV,vBot,(CumQ(i),
+            write(71,170,err=901) t,rTop,rRoot,vTop,vRoot,vBot,(CumQ(i),
+     !               i=1,5),hNew(N),hRoot,hNew(1),vRunOff,CumQ(6),
+     !               Volume,CumQ(7),CumQ(8),TLevel,CumQ(11),SnowLayer
+	    else
+            write(71,171,err=901) t,rTop,rRoot,vTop,vRoot,vBot,(CumQ(i),
+     !               i=1,5),hNew(N),hRoot,hNew(1),vRunOff,CumQ(6),
+     !               Volume,CumQ(7),CumQ(8),TLevel,CumQ(11),SnowLayer
+	    end if
 	  end if
         if(lChem) then
           write(70,180,err=902) TLevel,t,dt,IterW,IterC,ItCum,KodTop,
@@ -299,11 +299,11 @@ c120   format('+',f12.3,2i3,i6,4e9.2,3f6.0)  ! writing at one line
       double precision t
       dimension CumQ(12)
 
-!     if(ALevel.eq.1) write(72,110,err=901)
+      if(ALevel.eq.1) write(72,110,err=901)
       if(t.lt.999999.) then
-!       write(72,120,err=901) t,(CumQ(i),i=1,5),hNewN,hRoot,hNew1,ALevel
+        write(72,120,err=901) t,(CumQ(i),i=1,5),hNewN,hRoot,hNew1,ALevel
       else
-!       write(72,121,err=901) t,(CumQ(i),i=1,5),hNewN,hRoot,hNew1,ALevel
+        write(72,121,err=901) t,(CumQ(i),i=1,5),hNewN,hRoot,hNew1,ALevel
       end if
       return
 
@@ -595,48 +595,48 @@ c              ThGj=amax1(0.,ths(Mj)-ThWj+thSIm(Mj)-ThImobj)
         vN=vN-(ConVT(N)+ConVT(N-1))/2.*(Temp(N)-Temp(N-1))/dxN
       end if
 
-!     if(lPrint) then
-!       if(t.lt.99999999.) then
-!         write(76,110,err=901) t
-!       else
-!         write(76,111,err=901) t
-!       end if
-!       write(76,120,err=901) (i,i=1,NLay)
-!       write(76,130,err=901)
-!       write(76,140,err=901)   ATot,  (Area(i),i=1,NLay)
-!       if(lWat.or.PLevel.eq.0) then
-!         write(76,150,err=901) Volume,(SubVol(i),i=1,NLay)
-!         if(iDualPor.gt.0) write(76,151,err=901) VolumeIm
-!         write(76,160,err=901) Change,(SubCha(i),i=1,NLay)
-!         write(76,170,err=901) hTot,  ( hMean(i),i=1,NLay)
-!       end if
-!       if(lTemp) then
-!         write(76,180,err=901) TVol,  (  SubT(i),i=1,NLay)
-!         write(76,190,err=901) TTot,  ( TMean(i),i=1,NLay)
-!       end if
-!       if(lChem) then
-!         do 19 jS=1,NS
-!           write(76,200,err=901) jS,ConVol(jS),(ConSub(jS,i),i=1,NLay)
-!           write(76,210,err=901) jS,cTot(jS),  ( cMean(jS,i),i=1,NLay)
-!           if(.not.lEquil) then
-!             if(lMobIm(1).or.iDualPor.gt.0) then
-!               write(76,201,err=901)
-!    !                       jS,ConVolIm(jS),(ConSubIm(jS,i),i=1,NLay)
-!               write(76,211,err=901)
-!    !                       jS,cTotIm(jS)  ,(cMeanIm(jS,i) ,i=1,NLay)
-!             else
-!               write(76,202,err=901)
-!    !                       jS,ConVolIm(jS),(ConSubIm(jS,i),i=1,NLay)
-!               write(76,212,err=901)
-!    !                       jS,cTotIm(jS)  ,(cMeanIm(jS,i) ,i=1,NLay)
-!             end if
-!           end if
-!           if(lBact.or.lDualNEq) write(76,203,err=901)
-!    !                       jS,ConVolIm2(jS),(ConSubIm2(jS,i),i=1,NLay)
-!9        continue
-!       end if
-!       if(lWat.or.PLevel.eq.0) write(76,220,err=901) vN,v1
-!     end if
+      if(lPrint) then
+        if(t.lt.99999999.) then
+          write(76,110,err=901) t
+        else
+          write(76,111,err=901) t
+        end if
+        write(76,120,err=901) (i,i=1,NLay)
+        write(76,130,err=901)
+        write(76,140,err=901)   ATot,  (Area(i),i=1,NLay)
+        if(lWat.or.PLevel.eq.0) then
+          write(76,150,err=901) Volume,(SubVol(i),i=1,NLay)
+          if(iDualPor.gt.0) write(76,151,err=901) VolumeIm
+          write(76,160,err=901) Change,(SubCha(i),i=1,NLay)
+          write(76,170,err=901) hTot,  ( hMean(i),i=1,NLay)
+        end if
+        if(lTemp) then
+          write(76,180,err=901) TVol,  (  SubT(i),i=1,NLay)
+          write(76,190,err=901) TTot,  ( TMean(i),i=1,NLay)
+        end if
+        if(lChem) then
+          do 19 jS=1,NS
+            write(76,200,err=901) jS,ConVol(jS),(ConSub(jS,i),i=1,NLay)
+            write(76,210,err=901) jS,cTot(jS),  ( cMean(jS,i),i=1,NLay)
+            if(.not.lEquil) then
+              if(lMobIm(1).or.iDualPor.gt.0) then
+                write(76,201,err=901) 
+     !                       jS,ConVolIm(jS),(ConSubIm(jS,i),i=1,NLay)
+                write(76,211,err=901) 
+     !                       jS,cTotIm(jS)  ,(cMeanIm(jS,i) ,i=1,NLay)
+              else
+                write(76,202,err=901) 
+     !                       jS,ConVolIm(jS),(ConSubIm(jS,i),i=1,NLay)
+                write(76,212,err=901) 
+     !                       jS,cTotIm(jS)  ,(cMeanIm(jS,i) ,i=1,NLay)
+              end if
+            end if
+            if(lBact.or.lDualNEq) write(76,203,err=901) 
+     !                       jS,ConVolIm2(jS),(ConSubIm2(jS,i),i=1,NLay)
+19        continue
+        end if
+        if(lWat.or.PLevel.eq.0) write(76,220,err=901) vN,v1
+      end if
 
 *     Mass balance calculation
       if(PLevel.eq.0) then
@@ -654,11 +654,11 @@ c              ThGj=amax1(0.,ths(Mj)-ThWj+thSIm(Mj)-ThImobj)
         if(lWat) then
           wBalT=Volume-wVolI-wCumT
           if(iDualPor.gt.0) wBalT=Volume-wVolI-wCumT+VolumeIm
-!         if(lPrint) write(76,230,err=901) wBalT
+          if(lPrint) write(76,230,err=901) wBalT
           ww=amax1(DeltW,wCumA)
           if(ww.gt.1.e-25) then
             wBalR=abs(wBalT)/ww*100.
-!           if(lPrint) write(76,240,err=901) wBalR
+            if(lPrint) write(76,240,err=901) wBalR
           end if
         end if
         if(lChem) then
@@ -675,7 +675,7 @@ c              ThGj=amax1(0.,ths(Mj)-ThWj+thSIm(Mj)-ThImobj)
 21        continue
         end if
       end if
-!     if(lPrint) write(76,130,err=901)
+      if(lPrint) write(76,130,err=901)
       return
 
 *     Error when writing into an output file 
@@ -736,23 +736,23 @@ c              ThGj=amax1(0.,ths(Mj)-ThWj+thSIm(Mj)-ThImobj)
       Grav=CosAlf
       xS=xSurf+Radius
       if(TPrint.lt.99999999.) then
-        !write(75,110,err=901) TPrint
+        write(75,110,err=901) TPrint
         if(lVaporOut.and.lVapor) write(45,110,err=901) TPrint
       else
-        !write(75,111,err=901) TPrint
+        write(75,111,err=901) TPrint
         if(lVaporOut.and.lVapor) write(45,111,err=901) TPrint
       end if
       if(NS.eq.0) then
         if(iDualPor.eq.0) then
-          !write(75,112,err=901)
+          write(75,112,err=901)
         else
-          !write(75,113,err=901)
+          write(75,113,err=901)
         end if
       else
         if(iDualPor.eq.0) then
-          !write(75,114,err=901)
+          write(75,114,err=901)
         else
-          !write(75,115,err=901)
+          write(75,115,err=901)
         end if
       end if
       if(lVaporOut.and.lVapor) write(45,116,err=901)
@@ -812,73 +812,73 @@ c              ThGj=amax1(0.,ths(Mj)-ThWj+thSIm(Mj)-ThImobj)
             vVi =vVii+vVTi
           end if
         end if
-!       if(lVaporOut.and.lVapor) write(45,140,err=901) N-i+1,x(i)-xS,
-!    !         Con(i),ConLT(i),ConVh(i),ConVT(i),vi,vVi,vi+vVi,vVii,vVTi
-!       if(hNew(i).gt.-9.9e+05) then
-!         if(.not.lBact) then
-!           if(iDualPor.eq.0) then
-!             if(.not.lDualNEq) then
-!               write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !                Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
-!    !                Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS)
-!             else
-!               write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !                Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
-!    !                Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS),
-!    !                (Sorb2(jS,i),jS=1,NS)
-!             end if
-!           else
-!             if(.not.lDualNEq) then
-!               write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !              SinkIm(i),ThNewIm(i),vi+vVi,STrans(i),Kappa(i),
-!    !              vi/ConSN,Temp(i),(Conc(jS,i),jS=1,NS),
-!    !              (Sorb(jS,i),jS=1,NS)
-!             else
-!               write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !              SinkIm(i),ThNewIm(i),vi+vVi,STrans(i),Kappa(i),
-!    !              vi/ConSN,Temp(i),(Conc(jS,i),jS=1,NS),
-!    !              (Sorb(jS,i),jS=1,NS),(Sorb2(jS,i),jS=1,NS)
-!             end if
-!           end if
-!         else
-!           write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !            Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
-!    !            Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS),
-!    !            (Sorb2(jS,i),jS=1,NS)
-!         end if
-!       else
-!         if(.not.lBact) then
-!           if(iDualPor.eq.0) then
-!             if(.not.lDualNEq) then
-!               write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !                Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
-!    !                Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS)
-!             else
-!               write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !                Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
-!    !                Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS),
-!    !                (Sorb2(jS,i),jS=1,NS)
-!             end if
-!           else
-!             if(.not.lDualNEq) then
-!               write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !                SinkIm(i),ThNewIm(i),vi+vVi,STrans(i),Kappa(i),
-!    !                vi/ConSN,Temp(i),(Conc(jS,i),jS=1,NS),
-!    !                (Sorb(jS,i),jS=1,NS)
-!             else
-!               write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !              SinkIm(i),ThNewIm(i),vi+vVi,STrans(i),Kappa(i),
-!    !              vi/ConSN,Temp(i),(Conc(jS,i),jS=1,NS),
-!    !              (Sorb(jS,i),jS=1,NS),(Sorb2(jS,i),jS=1,NS)
-!             end if
-!           end if
-!         else
-!           write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
-!    !            Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
-!    !            Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS),
-!    !            (Sorb2(jS,i),jS=1,NS)
-!         end if
-!       end if
+        if(lVaporOut.and.lVapor) write(45,140,err=901) N-i+1,x(i)-xS,
+     !         Con(i),ConLT(i),ConVh(i),ConVT(i),vi,vVi,vi+vVi,vVii,vVTi
+        if(hNew(i).gt.-9.9e+05) then
+          if(.not.lBact) then
+            if(iDualPor.eq.0) then
+              if(.not.lDualNEq) then
+                write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !                Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
+     !                Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS)
+              else
+                write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !                Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
+     !                Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS),
+     !                (Sorb2(jS,i),jS=1,NS)
+              end if
+            else
+              if(.not.lDualNEq) then
+                write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !              SinkIm(i),ThNewIm(i),vi+vVi,STrans(i),Kappa(i),
+     !              vi/ConSN,Temp(i),(Conc(jS,i),jS=1,NS),
+     !              (Sorb(jS,i),jS=1,NS)
+              else
+                write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !              SinkIm(i),ThNewIm(i),vi+vVi,STrans(i),Kappa(i),
+     !              vi/ConSN,Temp(i),(Conc(jS,i),jS=1,NS),
+     !              (Sorb(jS,i),jS=1,NS),(Sorb2(jS,i),jS=1,NS)
+              end if
+            end if
+          else
+            write(75,120,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !            Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
+     !            Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS),
+     !            (Sorb2(jS,i),jS=1,NS)
+          end if
+        else
+          if(.not.lBact) then
+            if(iDualPor.eq.0) then
+              if(.not.lDualNEq) then
+                write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !                Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
+     !                Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS)
+              else
+                write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !                Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
+     !                Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS),
+     !                (Sorb2(jS,i),jS=1,NS)
+              end if
+            else
+              if(.not.lDualNEq) then
+                write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !                SinkIm(i),ThNewIm(i),vi+vVi,STrans(i),Kappa(i),
+     !                vi/ConSN,Temp(i),(Conc(jS,i),jS=1,NS),
+     !                (Sorb(jS,i),jS=1,NS)
+              else
+                write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !              SinkIm(i),ThNewIm(i),vi+vVi,STrans(i),Kappa(i),
+     !              vi/ConSN,Temp(i),(Conc(jS,i),jS=1,NS),
+     !              (Sorb(jS,i),jS=1,NS),(Sorb2(jS,i),jS=1,NS)
+              end if
+            end if
+          else
+            write(75,130,err=901) N-i+1,x(i)-xS,hNew(i),thN(i),
+     !            Con(i),Cap(i),vi+vVi,Sink(i),Kappa(i),vi/ConSN,
+     !            Temp(i),(Conc(jS,i),jS=1,NS),(Sorb(jS,i),jS=1,NS),
+     !            (Sorb2(jS,i),jS=1,NS)
+          end if
+        end if
 11    continue
       write(75,'(''end'')',err=901)
       if(lVaporOut.and.lVapor) write(45,'(''end'')',err=901)

@@ -141,8 +141,8 @@
       open(30,file=cFileName, status='old',err=901)
       cFileName = cDataPath(1:iLengthPath)//'/PROFILE.DAT'
       open(32,file=cFileName, status='old',err=901)
-       cFileName = cDataPath(1:iLengthPath)//'/I_CHECK.OUT'
-       open(50,file=cFileName, status='unknown',err=902)
+      cFileName = cDataPath(1:iLengthPath)//'/I_CHECK.OUT'
+      open(50,file=cFileName, status='unknown',err=902)
       if(lPrint) then
         cFileName = cDataPath(1:iLengthPath)//'/RUN_INF.OUT'
         open(70,file=cFileName, status='unknown',err=902)
@@ -183,10 +183,10 @@
       if(TopInF.or.BotInF.or.AtmBC) then
         cFileName = cDataPath(1:iLengthPath)//'/ATMOSPH.IN'
         open(31,file=cFileName, status='old',err=901)
-         if(lPrint) then
-           cFileName = cDataPath(1:iLengthPath)//'/A_LEVEL.OUT'
-           open(72,file=cFileName, status='unknown',err=902)
-         end if
+        if(lPrint) then
+          cFileName = cDataPath(1:iLengthPath)//'/A_LEVEL.OUT'
+          open(72,file=cFileName, status='unknown',err=902)
+        end if
         if(lMeteo) then
           cFileName = cDataPath(1:iLengthPath)//'/Meteo.in'
           open(33,file=cFileName, status='old',err=902)
@@ -210,7 +210,7 @@
       if(iHyst.gt.0.and.iHyst.ne.3)
      !call HysterIn(NumNP,NMat,hOld,MatNum,ParD,ParW,ThNew,ThOld,Kappa,
      !              AThS,ThRR,ConO,ConR,AKS,KappaO,Ah,AK,iHyst,iModel,
-     !              cDataPath)
+     !              cDataPath)      
       if(iModel.eq.nTabMod) then
         cFileName = cDataPath(1:iLengthPath)//'/Mater.in'
         open(36,file=cFileName, status='old',err=901)
@@ -290,7 +290,7 @@
      !    call NonEqInit(NumNP,NSD,NS,NMat,MatNum,TDep,TempO,ChPar,
      !                   Conc,Sorb,lLinear,lMobIm,iDualPor,lBact,Sorb2,
      !                   ThOld)
-        if(lPrint) then
+        if(lPrint) then 
           call OpenSoluteFiles(NS,cDataPath,iLengthPath,cFileName,err)
           if(err.eq.1) goto 902
         end if
@@ -325,7 +325,7 @@
      !    call SetChemBC(Prec,rSoil,NS,cTop,cT,WLayer,hNew(NumNP),
      !                   KodTop,kTopCh)
         if(lSnow) then
-          dtSnow=sngl(tAtm1-tInit)
+          dtSnow=sngl(tAtm1-tInit) 
           call Snow(Prec,dtSnow,tTop,SnowMF,SnowLayer,rSoil,xConv,
      !              lMinStep,cTop,cT,NS)
         end if
@@ -367,7 +367,7 @@
      !               MatNum,Cap,AK,Sink,ConSat,NS,NSD,Conc,TempO,Sorb,
      !               Kappa,lBact,Sorb2,lVapor,lWTDep,ConLT,ConVT,ConVh,
      !               ThOld(NumNP),dt,iDualPor,ThNewIm,SinkIm,STrans,
-     !               lDensity,lCentrif,Radius,lVaporOut,lDualNEq,err)
+     !               lDensity,lCentrif,Radius,lVaporOut,lDualNEq,err)    
         if(err.eq.1) goto 920
       end if
       call SubReg (NumNP,NMat,NLay,hNew,ThOld,ThOld,x,MatNum,LayNum,
@@ -388,7 +388,7 @@
         if(lVapor) ThVNew(i)=ThVOld(i)
         if(lVapor) vVNew(i) =vVOld(i)
 11    continue
-      if(lBact.and..not.lWat)
+      if(lBact.and..not.lWat) 
      !  call Exclusion(NumNP,NMat,NSD,ParD,ChPar,ThNew,vNew,ThOld,vOld)
 
       if(lScreen) write(*,*) 'beginning of numerical solution'
@@ -520,11 +520,11 @@
       end if
 
 *     Output ------------------------------------------------------------
-*     T-level information
+*     T-level information 
       if(abs(t-tMax).le.0.5*dtMin.or.t.gt.tMax) lEnd=.true.
       jPrint=0
       if((abs(TPrint(PLevel)-t).lt.0.001*dt.or.
-     !    (lPrintD.and.(abs(TPrint1-t).lt.0.001*dt)).or.
+     !    (lPrintD.and.(abs(TPrint1-t).lt.0.001*dt)).or. 
      !    (.not.ShortO.and.abs(float((TLevel+nPrStep-1)/nPrStep)-
      !    (TLevel+nPrStep-1)/float(nPrStep)).lt.0.0001))) jPrint=1
 
@@ -630,7 +630,7 @@
       if(WLayer.and.hNew(NumNP).gt.0.) then ! mass balance in the surface layer
         hT=hNew(NumNP)
         do 15 jj=1,NS
-          if((hT+dt*(Prec-rSoil)).gt.0.)
+          if((hT+dt*(Prec-rSoil)).gt.0.) 
      !      cTop(jj)=(hT*cTop(jj)+dt*Prec*cT(jj))/(hT+dt*(Prec-rSoil))
 15      continue
       end if
@@ -652,7 +652,7 @@
         if(.not.lWat) IterW=1
         Iter=max0(IterW,IterC)
         dtMaxA=min(dtMaxC,dtMaxT)
-        if(lSinPrec.and.PrecD.gt.0)
+        if(lSinPrec.and.PrecD.gt.0) 
      !    dtMaxA=min(dtMaxA,sngl(tAtm1-tAtmOld)/20.)
         call TmCont(dt,dtMax,dtOpt,dMul,dMul2,dtMin,Iter,
      !              min(TPrint(PLevel),TPrint1),tAtm,t,tMax,dtMaxA,
@@ -825,7 +825,7 @@
       cErr(30)='The path to the project is too long !!!'
       cErr(31)='Bulk density can not be equal to zero !'
       cErr(32)='Error when reading from an input file Meteo.in !'
-      cErr(33)='Crop Height must be smaller than the height of wind and
+      cErr(33)='Crop Height must be smaller than the height of wind and 
      !temperature measurements!'
 
       cFileNameErr = cDataPath(1:iLengthPath)//'/Error.msg'
@@ -861,7 +861,7 @@
       character(10) :: time
       character(5)  :: zone
       integer hundred
-
+      
       call date_and_time(date,time,zone,dtv)
       hundred=100
       iYear=dtv(1)
@@ -883,8 +883,8 @@
         write(76,*) 'Calculation time [sec]',Rtime2-RTime1
         write(71,'(''end'')')
         if(TopInF.or.BotInF) then
-           !write(72,'(''end'')')
-           if(lMeteo) write(43,'(''end'')')
+          write(72,'(''end'')')
+          if(lMeteo) write(43,'(''end'')')
         end if
         write(77,'(''end'')')
         if(lChem) then
@@ -899,20 +899,20 @@
 * ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 *-----------------------------------------------------------------------
-*     Signal handler routines
+*     Signal handler routines 
 *-----------------------------------------------------------------------
 *      integer(4) function h_sig (signum)
 *        use MSFLIB
 *        !MS$ATTRIBUTES C :: h_sig
-*        integer(2) signum
+*        integer(2) signum             
 *        select case (signum)
 *          case (SIG$ABORT)
 *            write(*,*) 'Abnormal termination !'
-*          case (SIG$INT)
+*          case (SIG$INT) 
 *            write(*,*) 'Program terminated !'
 *          case (SIG$FPE)
 *            write(*,*) 'Floating point error !'
-*          case (SIG$BREAK)
+*          case (SIG$BREAK) 
 *            write(*,*) 'Program terminated !'
 *          case default
 *            write(*,*) 'Unknown signal handler !'
@@ -971,11 +971,11 @@
         write(71,'(''end'')')
         close(71)
       end if
-!      inquire(unit=72,opened=lOpen)
-!      if(lOpen) then
-!        write(72,'(''end'')')
-!        close(72)
-!      end if
+      inquire(unit=72,opened=lOpen)
+      if(lOpen) then
+        write(72,'(''end'')')
+        close(72)
+      end if
       inquire(unit=77,opened=lOpen)
       if(lOpen) then
         write(77,'(''end'')')
